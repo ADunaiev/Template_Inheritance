@@ -75,12 +75,44 @@ child<T1, T2, T3, T4>::~child()
 }
 
 
+template <class T1, class T2, class T5, class T6>
+class child2 : public base <T1, T2>
+{
+	T5 value5;
+	T6 value6;
+public:
+	child2();
+	child2(T1 value1P, T2 value2P, T5 value5P, T6 value6P);
+	~child2();
+};
+
+template <class T1, class T2, class T5, class T6>
+child2<T1, T2, T5, T6>::child2()
+	: base <T1, T2>(), value5{ T5() }, value6{ T6() }
+{
+	cout << "Object child2 constructed\n";
+}
+
+template <class T1, class T2, class T5, class T6>
+child2<T1, T2, T5, T6>::child2(T1 value1P, T2 value2P, T5 value5P, T6 value6P)
+	: base<T1, T2>(value1P, value2P), value5{ value5P }, value6{ value6P }
+{
+	cout << "Object child2 constructed\n";
+}
+
+template <class T1, class T2, class T5, class T6>
+child2<T1, T2, T5, T6>::~child2()
+{
+	cout << "Object child2 destructed\n";
+}
+
 
 
 int main()
 {
 	base<int, long> obj1;
 	child<int, long, double, float> obj2{1, 2, 3, 4};
+	child2<int, long, char, bool> obj3;
 
 	return 0;
 }
